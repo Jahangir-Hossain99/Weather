@@ -59,8 +59,13 @@ const weekUrl = "http://api.openweathermap.org/data/2.5/forecast?units=metric&q=
 
 async function weekly(city ) {
 
-
-		const response = await fetch(weekUrl + city + `&appid=${apiKey}`);
+		 try {
+		  
+		    const response = await fetch('https://your-cors-proxy.com/http://api.openweathermap.org/data/2.5/forecast?units=metric&q=' + city + `&appid=${apiKey}`);
+		
+		    if (!response.ok) {
+		      throw new Error(`API request failed with status ${response.status}`);
+		    }
 		var data = await response.json();
 
 		console.log(data);
